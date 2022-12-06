@@ -15,8 +15,9 @@ def medals():
             break
         splitLine1 = line1.split('\t')
 
-        if splitLine1[6] == country and splitLine1[14] != "NA":
-            medalCount += 1
+        if splitLine1[6] == country:
+            if splitLine1[14]!="NA\n" and splitLine1[14]!="NA":
+                medalCount += 1
         Rcountries.append(splitLine1[6])
         RYears.append(splitLine1[9])
 
@@ -36,15 +37,16 @@ def medals():
 
         if sys.argv[1] == "-medals":
             if splitLine[6] == sys.argv[2] and splitLine[9] == sys.argv[3] and counter < 10:
-                name = splitLine[1]
-                medal = splitLine[14]
+                if splitLine[14]!="NA\n" and splitLine[14]!="NA":
+                    name = splitLine[1]
+                    medal = splitLine[14]
 
-                sport = splitLine[12]
-                print("name:" + name)
-                print("medal:" + medal)
-                print("sport:" + sport)
-                print("--------------")
-                counter += 1
+                    sport = splitLine[12]
+                    print("name:" + name)
+                    print("medal:" + medal)
+                    print("sport:" + sport)
+                    print("--------------")
+                    counter += 1
 
     print("Country has" + str(medalCount))
 
@@ -57,12 +59,13 @@ def total():
         if not lineTotal:
             break
         splitLineTotal = lineTotal.split('\t')
-        if splitLineTotal[14] != "NA" and yearTotal == splitLineTotal[9]:
-            name = splitLineTotal[6]
-            medal = splitLineTotal[14]
-            print("name:" + name)
-            print("medal:" + medal)
-            print("--------------")
+        if yearTotal == splitLineTotal[9]:
+            if splitLineTotal[14]!="NA\n" and splitLineTotal[14]!="NA":
+                name = splitLineTotal[6]
+                medal = splitLineTotal[14]
+                print("name:" + name)
+                print("medal:" + medal)
+                print("--------------")
 
 
 
