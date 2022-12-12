@@ -9,7 +9,7 @@ parser.add_argument('-C',"--command", required=True)
 #parser.add_argument("--interactive", action="store_true", required=False)
 parser.add_argument('-Coun',"--Country")
 parser.add_argument('-F', "--File", required=True)
-parser.add_argument('-Y',"--Year", type=str)
+parser.add_argument('-Y',"--Year", type=str )
 args=parser.parse_args()
 print(args)
 
