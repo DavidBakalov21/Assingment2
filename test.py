@@ -1,23 +1,14 @@
-#import sys
-import argparse
+import sys
+
 Rcountries = []
 RYears = []
 
-parser=argparse.ArgumentParser()
-parser.add_argument('-C',"--command", required=True)
-#parser.add_argument("--total", action="store_true", required=False)
-#parser.add_argument("--interactive", action="store_true", required=False)
-parser.add_argument('-Coun',"--Country")
-parser.add_argument('-F', "--File", required=True)
-parser.add_argument('-Y',"--Year", type=str)
-args=parser.parse_args()
-print(args)
 
 def medals():
     counter = 0
     medalCount = [0,0,0]
-    country = args.Country
-    year = args.Year
+    country = sys.argv[2]
+    year = sys.argv[3]
     while True:
         line1 = file.readline()
         if not line1:
@@ -48,8 +39,8 @@ def medals():
 
         splitLine = line.split('\t')
 
-        if args.command == "medals":
-            if splitLine[7] == args.Country and splitLine[9] ==args.Year and counter < 10:
+        if sys.argv[1] == "-medals":
+            if splitLine[7] == sys.argv[2] and splitLine[9] == sys.argv[3] and counter < 10:
                 if splitLine[14]!="NA\n" and splitLine[14]!="NA":
                     name = splitLine[1]
                     medal = splitLine[14]
@@ -65,7 +56,7 @@ def medals():
 
 
 def total():
-    yearTotal = args.Year
+    yearTotal = sys.argv[2]
     print(yearTotal)
     CountrieData={}
     while True:
@@ -92,7 +83,7 @@ def interactive():
     FirstYear=20000
     FirstPlace=""
     Countries=input("Enter country")
-    YearDict=dict()
+    YearDict={}
     Gold=0
     Bronze=0
     Silver=0
@@ -144,19 +135,19 @@ def interactive():
     print("Average Silver is:"+str(Silver//len(Olympcount)))
     print("Average Bronze is:"+str(Bronze//len(Olympcount)))
 
-#choice = sys.argv[1]
+choice = sys.argv[1]
 
 
 
 
 
-with open(args.File, "r") as file:
+with open("data.tsv", "r") as file:
     file.readline()
-    if args.command == "medals":
+    if choice == "-medals":
         medals()
-    elif args.command == "total":
+    elif choice == "-total":
         total()
-    elif args.command == "overall":
+    elif choice == "":
         pass
-    elif args.command == "interactive":
+    elif choice == "-interactive":
         interactive()
