@@ -11,7 +11,7 @@ parser.add_argument('-Coun',"--Country")
 parser.add_argument('-F', "--File", required=True)
 parser.add_argument('-Y',"--Year", type=str )
 
-parser.add_argument('-Y',"--Year", type=str)
+#parser.add_argument('-Y',"--Year", type=str)
 parser.add_argument('-OV',"--List", nargs='+')
 
 args=parser.parse_args()
