@@ -9,9 +9,46 @@ parser.add_argument('-C',"--command", required=True)
 #parser.add_argument("--interactive", action="store_true", required=False)
 parser.add_argument('-Coun',"--Country")
 parser.add_argument('-F', "--File", required=True)
-parser.add_argument('-Y',"--Year", type=str )
+parser.add_argument('-Y',"--Year", type=str)
+parser.add_argument('-OV',"--List", nargs='+')
 args=parser.parse_args()
 print(args)
+
+
+
+def overall():
+    countBEst=-1
+    YearDict=dict()
+    CountryList=args.List
+    print(CountryList)
+    BEST=""
+    for i in CountryList:
+        while True:
+            line1 = file.readline()
+            if not line1:
+                break
+            splitLine1 = line1.split('\t')
+
+            if splitLine1[7] == i:
+                if splitLine1[8] not in YearDict:
+                    YearDict[splitLine1[8]] = 0
+                if splitLine1[14]!="NA\n" and splitLine1[14]!="NA":
+                    YearDict[splitLine1[8]]+=1
+        for u in YearDict:
+            if YearDict[u]>countBEst:
+                countBEst=YearDict.get(u)
+                BEST=u
+
+        print(BEST+":"+str(countBEst))
+        BEST=""
+        countBEst=-1
+        YearDict.clear()
+        file.seek(0)
+
+
+
+
+
 
 def medals():
     counter = 0
@@ -157,6 +194,6 @@ with open(args.File, "r") as file:
     elif args.command == "total":
         total()
     elif args.command == "overall":
-        pass
+        overall()
     elif args.command == "interactive":
         interactive()
